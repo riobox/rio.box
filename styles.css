@@ -129,6 +129,16 @@ nav a:hover{color:var(--accent)}
   fill: none;                 /* keep fill transparent unless needed */
 }
 
+.action-btn::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: no-repeat center/contain url(attr(data-icon));
+  margin-right: 12px; /* space between icon and text */
+  flex-shrink: 0;
+}
+
 
 /* SMALL helper */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

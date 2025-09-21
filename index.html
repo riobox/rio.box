@@ -4,157 +4,27 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Riobox</title>
+<meta name="description" content="Riobox is the personal portfolio of Raio, showcasing projects, social media links, achievements, and personal info.">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="styles.css">
 
-<style>
-:root{
-  --bg-color:#181820;
-  --text-color:#fff;
-  --accent:#39d353;
-  --subtle:#b0b0b0;
-  --card-bg: rgba(8,8,10,0.55);
-  --card-border: rgba(57,211,83,0.18);
-  --glass-blur: 6px;
-  --card-radius:18px;
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Riobox",
+  "url": "https://rio.box/",
+  "sameAs": [
+    "https://www.reddit.com/user/Riobox",
+    "https://xcancel.com/RAIOXBOX/media",
+    "https://riobox.github.io/",
+    "https://discord.com/invite/QtEHmWy7vp",
+    "https://www.youtube.com/@RAIOXBOX",
+    "https://character.ai/profile/RAIO_XBOX",
+    "https://gdbrowser.com/u/RAIOXBOX36"
+  ]
 }
-
-/* Reset + base */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family:'Roboto Mono', monospace;
-  color:var(--text-color);
-  background: linear-gradient(to bottom, #000000, var(--bg-color));
-  overflow-x:hidden;
-  line-height:1.5;
-  position:relative;
-}
-
-/* Header + hero (kept mostly from original) */
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:20px 50px; z-index:2; position:relative;
-}
-header h1{font-weight:700;font-size:1.4rem;letter-spacing:1px}
-nav a{color:var(--text-color);text-decoration:none;margin-left:22px;font-weight:500;transition:color .2s}
-nav a:hover{color:var(--accent)}
-
-/* Hero */
-.hero{
-  text-align:center;padding:100px 20px 50px;z-index:2;position:relative;
-}
-.hero h2{font-size:2.4rem;font-weight:700;margin-bottom:14px}
-.hero h2 .accent{color:var(--accent)}
-.hero p{color:var(--subtle);font-size:1.05rem;margin-bottom:18px}
-.hero button{
-  background:transparent;border:2px solid var(--accent);color:var(--accent);
-  padding:10px 22px;font-weight:700;border-radius:6px;cursor:pointer;transition:all .2s
-}
-.hero button:hover{background:var(--accent);color:var(--bg-color)}
-
-/* Canvas sits behind everything */
-#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
-
-/* ---------- PROFILE CARD (middle-right) ---------- */
-.profile-card{
-  position: absolute;
-  right: clamp(14px, 6vw, 70px);
-  top: 50%;
-  transform: translateY(-50%);
-  width: 340px;
-  max-width: 36vw;
-  background: var(--card-bg);
-  border-radius: var(--card-radius);
-  border: 1.5px solid var(--card-border);
-  padding: 26px;
-  z-index: 3;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-  backdrop-filter: blur(var(--glass-blur));
-  color:var(--text-color);
-}
-
-/* Rounded top highlight (like your image) */
-.profile-avatar{
-  width: 110px;
-  height: 110px;
-  border-radius: 999px;
-  margin: 0 auto 12px;
-  display:block;
-  overflow:hidden;
-  border: 3px solid rgba(57,211,83,0.98);
-  padding:4px;
-  background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 14px rgba(57,211,83,0.04) inset;
-}
-.profile-avatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:999px}
-
-/* Name + meta */
-.profile-name{text-align:center;font-size:1.9rem;font-weight:700;margin-top:6px}
-.profile-quote{text-align:center;color:var(--subtle);font-size:.92rem;margin:8px 0 10px;opacity:.95}
-.profile-meta{display:flex;justify-content:center;gap:18px;color:var(--subtle);font-size:.9rem;margin-bottom:14px}
-
-/* Action buttons (categories) */
-.profile-actions{display:flex;flex-direction:column;gap:12px;margin:10px 6px 16px}
-.action-btn{
-  display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;
-  border:1.6px solid rgba(57,211,83,0.18);background:transparent;color:var(--text-color);
-  text-decoration:none;font-weight:600;font-size:.98rem;cursor:pointer;transition:transform .15s,background .15s;
-}
-.action-btn svg{width:18px;height:18px;flex:0 0 18px;opacity:.95}
-.action-btn:hover{transform:translateY(-4px);background:rgba(57,211,83,0.03)}
-
-/* Social icons row */
-.socials {
-  display: flex;
-  flex-wrap: wrap;            /* Allow multiple rows */
-  justify-content: center;
-  gap: 14px 18px;             /* vertical gap 14px, horizontal 18px */
-  margin-top: 12px;           /* spacing from profile actions */
-}
-
-.socials a {
-  width: 48px;                /* bigger icons */
-  height: 48px;
-  border-radius: 999px;       /* circular border */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.6px solid rgba(57,211,83,0.18);  /* restore the green border */
-  background: transparent;    /* keep transparent background */
-  color: var(--accent);       /* set icons to green */
-  text-decoration: none;
-  transition: transform .12s, background .12s;
-}
-
-.socials a:hover {
-  transform: translateY(-3px);
-  background: rgba(57,211,83,0.03);
-}
-
-.socials a svg {
-  width: 22px;                /* make the SVG slightly bigger */
-  height: 22px;
-  stroke: currentColor;       /* ensures SVG inherits the a's color */
-  fill: none;                 /* keep fill transparent unless needed */
-}
-
-
-/* SMALL helper */
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-/* ---------- Responsive: stack on small screens ---------- */
-@media (max-width:780px){
-  .profile-card{
-    position:static;
-    transform:none;
-    margin:18px auto;
-    width:92%;
-    max-width:520px;
-  }
-  header{padding:16px 20px}
-  .hero{padding:80px 14px 40px}
-}
-</style>
+</script>
 </head>
 <body>
 
@@ -172,6 +42,7 @@ nav a:hover{color:var(--accent)}
 </header>
 
 <section class="hero">
+<h1>Riobox | My Personal Portfolio</h1>
   <h2>Welcome to <span class="accent">my profile</span>!</h2>
   <p>Here you can learn about me, Riobox.<br>You can know about my social medias, my accounts,<br>my fun facts, my achievements, as well as<br>whether you can DM me or not!</p>
   <button>Get a free cookie!</button>
@@ -193,14 +64,7 @@ nav a:hover{color:var(--accent)}
   </div>
 
   <div class="profile-actions" aria-label="Profile quick links">
-    <a href="#about" class="action-btn" role="button">
-      <!-- simple key icon -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M21 2v6l-9 9-5-5 9-9z"></path>
-        <circle cx="6.5" cy="6.5" r="1.5"></circle>
-      </svg>
-      Information About Me
-    </a>
+    <a href="#about" class="action-btn" role="button" data-icon="icons/key.svg">Information About Me</a>
 
     <a href="#guidelines" class="action-btn" role="button">
       <!-- info icon -->
@@ -225,172 +89,16 @@ nav a:hover{color:var(--accent)}
     <a href="#" class="cai" data-icon="icons/cai.svg"></a>
 
     <a href="#" class="discord" data-icon="icons/discord.svg"></a>
+    
+    <a href="#" class="youtube" data-icon="icons/youtube.svg"></a>
 
-    <a href="#" aria-label="YouTube">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
-        <rect x="2" y="6" width="20" height="15" rx="3"></rect>
-        <path d="M10 10.5l5 3-5 3z"></path>
-      </svg>
-    </a>
+    <a href="#" class="x" data-icon="icons/x.svg"></a>
 
-    <a href="#" aria-label="X">
-      <svg viewBox="0 0 30 30" width="18" height="18" fill="currentColor">
-  <path d="M26.37,26l-8.795-12.822l0.015,0.012L25.52,4h-2.65l-6.46,7.48L11.28,4H4.33l8.211,11.971L12.54,15.97L3.88,26h2.65 l7.182-8.322L19.42,26H26.37z M10.23,6l12.34,18h-2.1L8.12,6H10.23z"/>
-</svg>
-    </a>
-
-    <a href="mailto:you@example.com" aria-label="Email">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
-        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-        <path d="M3 7l9 6 9-6"></path>
-      </svg>
-    </a>
+    <a href="mailto:you@example.com" class="mail" data-icon="icons/mail.svg"></a>
   </nav>
 </aside>
 <!-- ===== end profile card ===== -->
 
-<script>
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-
-let width = canvas.width = window.innerWidth;
-let height = canvas.height = window.innerHeight;
-
-// Cursor
-let mouse = { x: -1000, y: -1000 };
-
-// Background drift
-let bgOffsetX = 0;
-let bgOffsetY = 0;
-
-// Hex
-const hexWidth = 100;
-const hexHeight = 87;
-const strokeColor = 'rgba(57,211,83,0.15)';
-const lineWidth = 2;
-const rowSpacing = hexHeight * 0.75; // vertical distance between rows
-
-const startCol = Math.floor(-bgOffsetX / hexWidth) - 1;
-const endCol = Math.ceil((width - bgOffsetX) / hexWidth) + 1;
-
-const startRow = Math.floor(-bgOffsetY / rowSpacing) - 1;
-const endRow = Math.ceil((height - bgOffsetY) / rowSpacing) + 1;
-
-// Ripples
-let ripples = [];
-
-// Draw single hex
-function drawHex(x, y) {
-    ctx.beginPath();
-    ctx.moveTo(x + hexWidth/2, y);
-    ctx.lineTo(x + hexWidth, y + 25);
-    ctx.lineTo(x + hexWidth, y + 62);
-    ctx.lineTo(x + hexWidth/2, y + 87);
-    ctx.lineTo(x, y + 62);
-    ctx.lineTo(x, y + 25);
-    ctx.closePath();
-    ctx.strokeStyle = strokeColor;
-    ctx.lineWidth = lineWidth;
-    ctx.stroke();
-}
-
-// Draw background
-function drawBackground() {
-    ctx.clearRect(0, 0, width, height);
-
-    // Compute loop bounds based on current offsets
-    const startCol = Math.floor(-bgOffsetX / hexWidth) - 1;
-    const endCol = Math.ceil((width - bgOffsetX) / hexWidth) + 1;
-
-    const startRow = Math.floor(-bgOffsetY / rowSpacing) - 1;
-    const endRow = Math.ceil((height - bgOffsetY) / rowSpacing) + 1;
-
-    for (let row = startRow; row < endRow; row++) {
-        const rowOffset = (row % 2 !== 0) ? (hexWidth / 2) : 0;
-
-        for (let col = startCol; col < endCol; col++) {
-            const hSpacing = 4; // horizontal gap in pixels
-const rowOffset = (row % 2 !== 0) ? (hexWidth + hSpacing)/2 : 0;
-const baseX = col * (hexWidth + hSpacing) + bgOffsetX + rowOffset;
-
-            const baseY = row * rowSpacing + bgOffsetY;
-
-            let offsetX = 0;
-            let offsetY = 0;
-
-            // Mouse effect
-            const dx = baseX - mouse.x;
-            const dy = baseY - mouse.y;
-            const dist = Math.sqrt(dx*dx + dy*dy);
-            if (dist < 150) {
-                const force = (1 - dist/150) * 5;
-                offsetX += Math.sin(dy/20) * force;
-                offsetY += Math.cos(dx/20) * force;
-            }
-
-            // Click ripple
-            ripples.forEach(r => {
-                const dxr = baseX - r.x;
-                const dyr = baseY - r.y;
-                const distR = Math.sqrt(dxr*dxr + dyr*dyr);
-                if (distR < 150) {
-                    const force = (1 - distR/150) * r.strength;
-                    offsetX += Math.sin(dyr/20) * force;
-                    offsetY += Math.cos(dxr/20) * force;
-                }
-            });
-
-            drawHex(baseX + offsetX, baseY + offsetY);
-        }
-    }
-}
-
-// Animate
-function animate() {
-    bgOffsetX += 0.15; // move right
-    bgOffsetY += 0.1;  // move down
-
-    drawBackground();
-
-    ripples = ripples.filter(r => {
-        r.strength -= 0.25;
-        return r.strength > 0;
-    });
-
-    requestAnimationFrame(animate);
-}
-animate();
-
-// Mouse
-document.addEventListener('mousemove', e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-});
-document.addEventListener('mouseleave', () => {
-    mouse.x = -1000;
-    mouse.y = -1000;
-});
-
-// Click ripple
-document.addEventListener('click', e => {
-    ripples.push({ x: e.clientX, y: e.clientY, strength: 50 });
-});
-
-// Resize
-window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-});
-
-document.querySelectorAll('[data-icon]').forEach(el => {
-  const url = el.dataset.icon;
-  fetch(url)
-    .then(res => res.text())
-    .then(svg => {
-      el.innerHTML = svg;
-    });
-});
-</script>
-
+<script src="script.js" defer></script>
 </body>
 </html>
